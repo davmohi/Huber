@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 30-sep-2017 15:36:56 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="una.progra4.huber.domain.Veiculo" table="veiculo" catalog="" optimistic-lock="version">
+        <id name="placa" type="int">
+            <column name="Placa" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="usuario" class="una.progra4.huber.domain.Usuario" fetch="select">
+            <column name="Usuario_Actual" length="45" not-null="true" />
+        </many-to-one>
+        <property name="modelo" type="string">
+            <column name="Modelo" length="45" not-null="true" />
+        </property>
+        <property name="ano" type="int">
+            <column name="ano" not-null="true" />
+        </property>
+        <property name="color" type="string">
+            <column name="Color" length="45" not-null="true" />
+        </property>
+        <property name="puntuacion" type="java.lang.Integer">
+            <column name="Puntuacion" />
+        </property>
+        <property name="estado" type="short">
+            <column name="Estado" not-null="true" />
+        </property>
+        <property name="ubicacionId" type="int">
+            <column name="Ubicacion_Id" not-null="true" />
+        </property>
+        <property name="vigente" type="short">
+            <column name="Vigente" not-null="true" />
+        </property>
+        <property name="licencia" type="string">
+            <column name="Licencia" length="45" not-null="true" />
+        </property>
+        <set name="servicios" table="servicio" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="Veiculo_Placa" not-null="true" />
+            </key>
+            <one-to-many class="una.progra4.huber.domain.Servicio" />
+        </set>
+        <set name="usuarios" table="vehiculousuario" inverse="false" lazy="true" fetch="select">
+            <key>
+                <column name="Veiculo_Placa" not-null="true" />
+            </key>
+            <many-to-many entity-name="una.progra4.huber.domain.Usuario">
+                <column name="Usuario_Id" length="45" not-null="true" />
+            </many-to-many>
+        </set>
+    </class>
+</hibernate-mapping>

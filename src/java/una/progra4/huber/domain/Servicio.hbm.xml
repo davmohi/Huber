@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 30-sep-2017 15:36:56 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="una.progra4.huber.domain.Servicio" table="servicio" catalog="" optimistic-lock="version">
+        <composite-id name="id" class="una.progra4.huber.domain.ServicioId">
+            <key-property name="id" type="int">
+                <column name="Id" />
+            </key-property>
+            <key-property name="veiculoPlaca" type="int">
+                <column name="Veiculo_Placa" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="usuarioByUsuarioTripulante" class="una.progra4.huber.domain.Usuario" fetch="select">
+            <column name="Usuario_Tripulante" length="45" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuarioByUsuarioConductor" class="una.progra4.huber.domain.Usuario" fetch="select">
+            <column name="Usuario_Conductor" length="45" not-null="true" />
+        </many-to-one>
+        <many-to-one name="veiculo" class="una.progra4.huber.domain.Veiculo" update="false" insert="false" fetch="select">
+            <column name="Veiculo_Placa" not-null="true" />
+        </many-to-one>
+        <property name="ubicacionInicio" type="int">
+            <column name="Ubicacion_Inicio" not-null="true" />
+        </property>
+        <property name="ubicacionFin" type="int">
+            <column name="Ubicacion_Fin" not-null="true" />
+        </property>
+        <property name="horaIn" type="timestamp">
+            <column name="HoraIN" length="19" />
+        </property>
+        <property name="horaFn" type="timestamp">
+            <column name="HoraFn" length="19" />
+        </property>
+        <property name="costo" type="java.lang.Long">
+            <column name="Costo" precision="10" scale="0" />
+        </property>
+        <property name="puntuacion" type="java.lang.Integer">
+            <column name="Puntuacion" />
+        </property>
+        <property name="retroalimentacion" type="string">
+            <column name="Retroalimentacion" length="100" />
+        </property>
+        <property name="fecha" type="date">
+            <column name="fecha" length="10" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>
